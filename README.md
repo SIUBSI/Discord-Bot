@@ -1,7 +1,7 @@
 # Instalasi
 ***
 
-[Unduh Versi terbaru](https://github.com/SIUBSI/HitungNilai/releases/tag/v1.0.0) | [Lihat Daftar Versi Tersedia](https://github.com/SIUBSI/HitungNilai/releases/)
+[Unduh Versi terbaru](https://github.com/SIUBSI/Discord-Bot/releases/tag/v1.0.0) | [Lihat Daftar Versi Tersedia](https://github.com/SIUBSI/Discord-Bot/releases)
 
 #### Atau Dengan Menggunakan Git
 
