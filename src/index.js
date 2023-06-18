@@ -6,10 +6,10 @@ const express = require('express');
 const app = express();
 const port = 3001;
 
-app.get('/', (req, res) => res.send('Aktif...'));
+app.get('/', (req, res) => res.send('Bot Aktif!'));
 
 app.listen(port, () =>
-console.log(`Logging in...`)
+console.log(`Memulai mengaktifkan Bot...`)
 );
 
 const client = new Client({
@@ -27,16 +27,18 @@ const client = new Client({
 
     client.login(process.env.TOKEN);
   } catch (error) {
-    console.log(`Error: ${error}`);
+    console.log(`Terdapat kesalahan: ${error}`);
   }
 })();
 
 client.on(Events.InteractionCreate, async interaction => {
 
+  // Bot Activity (for now, type of activity set with Watching)
   client.user.setActivity("by SIUBSI - Staff", {
     type: ActivityType.Watching,
   });
 
+  // Modal untuk Perintah 'Saran'
   if (!interaction.isModalSubmit()) return;
 
   if (interaction.customId === 'modal') {
@@ -56,7 +58,7 @@ client.on(Events.InteractionCreate, async interaction => {
         .setTimestamp()
 
   // console.log(`Name: ${name}\nPesan: ${pesan}`)
-  client.channels.cache.get('ChannelID').send({ embeds: [embednya] });
+  client.channels.cache.get('ChannelID').send({ embeds: [embednya] }); // Ubah 'ChannelID' menjadi ID Channel pada Server discord anda
   console.log(`Saran dari - ${name}`);
 
 })
