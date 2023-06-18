@@ -15,20 +15,20 @@ module.exports = {
   callback: async (client, interaction) => {
     const targetUserId = interaction.options.get('target-user').value;
     const reason =
-      interaction.options.get('reason')?.value || 'No reason provided';
+      interaction.options.get('reason')?.value || '-';
 
     await interaction.deferReply();
 
     const targetUser = await interaction.guild.members.fetch(targetUserId);
 
     if (!targetUser) {
-      await interaction.editReply("That user doesn't exist in this server.");
+      await interaction.editReply("Pengguna tersebut tidak ditemukan di server ini.");
       return;
     }
 
     if (targetUser.id === interaction.guild.ownerId) {
       await interaction.editReply(
-        "You can't ban that user because they're the server owner."
+        "Anda tidak dapat kick pengguna tersebut karena dia adalah pemilik server."
       );
       return;
     }
@@ -39,14 +39,14 @@ module.exports = {
 
     if (targetUserRolePosition >= requestUserRolePosition) {
       await interaction.editReply(
-        "You can't ban that user because they have the same/higher role than you."
+        "Anda tidak dapat kick pengguna tersebut karena mereka memiliki peran yang sama/lebih tinggi dari Anda."
       );
       return;
     }
 
     if (targetUserRolePosition >= botRolePosition) {
       await interaction.editReply(
-        "I can't ban that user because they have the same/higher role than me."
+        "Bot tidak dapat kick pengguna tersebut karena mereka memiliki peran yang sama/lebih tinggi dari Bot."
       );
       return;
     }
@@ -55,10 +55,10 @@ module.exports = {
     try {
       await targetUser.ban({ reason });
       await interaction.editReply(
-        `User ${targetUser} was banned\nReason: ${reason}`
+        `Pengguna ${targetUser} telah di ban dari Server\nReason: ${reason}`
       );
     } catch (error) {
-      console.log(`There was an error when banning: ${error}`);
+      console.log(`Terdapat kesalahan ketika menjalankan perintah Ban: ${error}`);
     }
   },
 
@@ -67,17 +67,17 @@ module.exports = {
   options: [
     {
       name: 'target-user',
-      description: 'The user you want to ban.',
+      description: 'Siapa yang ingin anda Ban?',
       type: ApplicationCommandOptionType.Mentionable,
       required: true,
     },
     {
       name: 'reason',
-      description: 'The reason you want to ban.',
+      description: 'Alasan mengapa pengguna di Ban.',
       type: ApplicationCommandOptionType.String,
     },
   ],
-  devOnly: true,
+  devOnly: true, // Ubah ke false jika ingin perintah ini digunakan untuk user selain Pemilik Bot (tetapi user yang memiliki hak Ban User/Member)
   permissionsRequired: [PermissionFlagsBits.BanMembers],
   botPermissions: [PermissionFlagsBits.BanMembers],
 };

@@ -21,7 +21,7 @@ module.exports = async (client) => {
       if (existingCommand) {
         if (localCommand.deleted) {
           await applicationCommands.delete(existingCommand.id);
-          console.log(`Deleted command "${name}".`);
+          console.log(`Perintah "${name}" telah dihapus.`);
           continue;
         }
 
@@ -31,12 +31,12 @@ module.exports = async (client) => {
             options,
           });
 
-          console.log(`Edited command "${name}".`);
+          console.log(`Perintah "${name}" telah disunting.`);
         }
       } else {
         if (localCommand.deleted) {
           console.log(
-            `Skipping registering command "${name}" as it's set to delete.`
+            `Perintah "${name}" gagal didaftarkan!`
           );
           continue;
         }
@@ -47,10 +47,10 @@ module.exports = async (client) => {
           options,
         });
 
-        console.log(`Registered command "${name}."`);
+        console.log(`Perintah "${name} berhasil didaftarkan."`);
       }
     }
   } catch (error) {
-    console.log(`There was an error: ${error}`);
+    console.log(`Ada error: ${error}`);
   }
 };

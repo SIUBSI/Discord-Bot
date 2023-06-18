@@ -16,7 +16,7 @@ module.exports = async (client, interaction) => {
     if (commandObject.devOnly) {
       if (!devs.includes(interaction.member.id)) {
         interaction.reply({
-          content: 'Only developers are allowed to run this command.',
+          content: 'Hanya pembuat Bot yang dapat menggunakan Perintah tersebut.',
           ephemeral: true,
         });
         return;
@@ -26,7 +26,7 @@ module.exports = async (client, interaction) => {
     if (commandObject.testOnly) {
       if (!(interaction.guild.id === testServer)) {
         interaction.reply({
-          content: 'This command cannot be ran here.',
+          content: 'Perintah ini tidak dapat dijalankan disini.',
           ephemeral: true,
         });
         return;
@@ -37,7 +37,7 @@ module.exports = async (client, interaction) => {
       for (const permission of commandObject.permissionsRequired) {
         if (!interaction.member.permissions.has(permission)) {
           interaction.reply({
-            content: 'Not enough permissions.',
+            content: 'Kamu tidak memiliki cukup hak untuk menjalankan perintah tersebut.',
             ephemeral: true,
           });
           return;
@@ -51,7 +51,7 @@ module.exports = async (client, interaction) => {
 
         if (!bot.permissions.has(permission)) {
           interaction.reply({
-            content: "I don't have enough permissions.",
+            content: "Bot tidak memiliki cukup hak untuk menjalankan perintah tersebut.",
             ephemeral: true,
           });
           return;
@@ -61,6 +61,6 @@ module.exports = async (client, interaction) => {
 
     await commandObject.callback(client, interaction);
   } catch (error) {
-    console.log(`There was an error running this command: ${error}`);
+    console.log(`Ada error ketika menjalankan perintah: ${error}`);
   }
 };

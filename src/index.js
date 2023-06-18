@@ -1,13 +1,12 @@
 require('dotenv').config('./.env');
 const { Client, IntentsBitField, Events, EmbedBuilder, ActivityType } = require('discord.js');
-const mongoose = require('mongoose');
 const eventHandler = require('./handlers/eventHandler');
 
 const express = require('express');
 const app = express();
 const port = 3001;
 
-app.get('/', (req, res) => res.send('Online...'));
+app.get('/', (req, res) => res.send('Aktif...'));
 
 app.listen(port, () =>
 console.log(`Logging in...`)
@@ -24,10 +23,6 @@ const client = new Client({
 
 (async () => {
   try {
-    mongoose.set('strictQuery', false);
-    await mongoose.connect(process.env.MONGODB_URI);
-    console.log('Connected to DB.');
-
     eventHandler(client);
 
     client.login(process.env.TOKEN);
